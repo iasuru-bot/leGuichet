@@ -17,6 +17,7 @@ const HomePage = () => {
         {/* Login Button */}
         <NavigationButton title={'Login'} link={'./LoginForm'}/>
         <NavigationButton title={'LP'} link={'./LandingPage'}/>
+        <NavigationButton title={'Annonce'} link={'./AnnoncePage'}/>
 
       </View>
     </View>

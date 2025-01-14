@@ -1,103 +1,144 @@
-import React from 'react';
-import styled from 'styled-components/native';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
-import SearchInput from '@/components/searchBar';
+import React, { useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
+} from 'react-native'; import SearchBar from '@/components/searchBar';
+import CardList from '@/components/cardList';
+import Navbar from '@/components/navbar';
+import Input from '@/components/input';
 
-const LandingPage: React.FC = () => {
+interface CardProps {
+  id: string;
+  imageUrl: string;
+  category: string;
+  heading: string;
+  authorName: string;
+  authorDate: string;
+}
+
+const cards: CardProps[] = [
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Immobilier',
+    heading: 'Appartement T3 à louer en centre-ville',
+    authorName: 'Marie Dupont',
+    authorDate: '14 janvier 2025',
+    id: '1',
+  },
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Véhicules',
+    heading: 'Peugeot 208 d’occasion - 2018',
+    authorName: 'Jean Martin',
+    authorDate: '12 janvier 2025',
+    id: '2',
+  },
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Electroménager',
+    heading: 'Réfrigérateur Samsung presque neuf',
+    authorName: 'Claire Petit',
+    authorDate: '10 janvier 2025',
+    id: '3',
+  },
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Multimédia',
+    heading: 'MacBook Pro 2020 - Très bon état',
+    authorName: 'Antoine Bernard',
+    authorDate: '8 janvier 2025',
+    id: '4',
+  },
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Loisirs',
+    heading: 'Vélo VTT Rockrider 540',
+    authorName: 'Luc Durand',
+    authorDate: '5 janvier 2025',
+    id: '5',
+  },
+  {
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Mode',
+    heading: 'Montre Fossil en cuir - Comme neuve',
+    authorName: 'Julie Robert',
+    authorDate: '2 janvier 2025',
+    id: '6',
+  },
+];
+
+const LandingPage = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {/* Header */}
-      <StyledHeader>
-        <StyledTitle>Welcome to Find It</StyledTitle>
-        <StyledSubtitle>Discover hidden treasures and virtual caches!</StyledSubtitle>
-      </StyledHeader>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          {/* Titre */}
+          <Text style={styles.title}>Bienvenue sur Find It</Text>
 
-      {/* Search Bar */}
-      <SearchSection>
-        <SearchInput value="" onChangeText={() => {}} />
-      </SearchSection>
+          {/* Barre de recherche */}
+          <View style={styles.searchBar}>
+            <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
+          </View>
 
-      {/* Info Sections */}
-      <StyledSection>
-        <StyledSectionTitle>How It Works</StyledSectionTitle>
-        <StyledSectionText>
-          Search for virtual caches placed at real-world locations and start your adventure!
-        </StyledSectionText>
-      </StyledSection>
+          {/* Liste des cartes */}
+          <CardList cards={cards} />
 
-      <StyledSection>
-        <StyledSectionTitle>Explore and Collect</StyledSectionTitle>
-        <StyledSectionText>
-          Travel to different spots, collect caches, and share your discoveries with the community!
-        </StyledSectionText>
-      </StyledSection>
-
-      <StyledSection>
-        <StyledSectionTitle>Join the Community</StyledSectionTitle>
-        <StyledSectionText>
-          Become part of a growing community of explorers and cache hunters. Let's find them all!
-        </StyledSectionText>
-      </StyledSection>
-    </ScrollView>
+          {/* Navbar */}
+          <Navbar />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 
-const styles = {
-  container: {
-    padding: 20,
-    backgroundColor: '#f4f5f7',
-  },
-  footerText: {
-    textAlign: 'center',
-    color: '#555',
-  },
-};
-
-const StyledHeader = styled.View`
-  align-items: center;
-  margin-bottom: 40px;
-`;
-
-const StyledTitle = styled.Text`
-  font-size: 28px;
-  font-weight: 600;
-  color: #023047;
-`;
-
-const StyledSubtitle = styled.Text`
-  font-size: 16px;
-  color: #219EBC;
-  margin-top: 5px;
-`;
-
-const SearchSection = styled.View`
-  margin-bottom: 30px;
-`;
-
-const StyledSection = styled.View`
-  margin-bottom: 20px;
-`;
-
-const StyledSectionTitle = styled.Text`
-  font-size: 22px;
-  font-weight: 600;
-  color: #023047;
-`;
-
-const StyledSectionText = styled.Text`
-  font-size: 16px;
-  color: #0d0c22;
-  margin-top: 10px;
-`;
-
-const StyledFooter = styled.View`
-  margin-top: 40px;
-  align-items: center;
-`;
-
-const StyledLink = styled.Text`
-  color: #00bfff;
-  text-decoration: underline;
-`;
-
 export default LandingPage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#023047', // Couleur de fond tirée du thème
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFB703',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  searchBar: {
+    paddingHorizontal: 16,
+    marginBottom: 10,
+  },
+  searchInput: {
+    backgroundColor: '#8ECAE6',
+    borderRadius: 8,
+    padding: 10,
+    fontSize: 16,
+    color: '#023047',
+  },
+  cardContainer: {
+    paddingHorizontal: 16,
+  },
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 12,
+  },
+  navItem: {
+    color: '#FFB703',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});

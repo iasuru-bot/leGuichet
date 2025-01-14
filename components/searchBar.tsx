@@ -12,7 +12,7 @@ interface SearchInputProps {
 const SearchInput: React.FC<SearchInputProps> = ({ value, onChangeText }) => {
   const borderColor = useThemeColor({}, 'primary');  // Use appropriate color from your theme
   const backgroundColor = useThemeColor({}, 'background'); // Get background color from theme
-  const placeholderColor = useThemeColor({}, 'primary'); // Placeholder color from theme
+  const placeholderColor = useThemeColor({}, 'white'); // Placeholder color from theme
   const textColor = useThemeColor({}, 'text'); // Text color from theme
   
   return (
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 12,
     fontSize: 16,
-    transition: '.3s ease',
   },
 });
 

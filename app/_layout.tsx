@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Loader from '@/components/loader';
+import { SessionProvider } from './SessionContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -60,9 +61,9 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      {/* <SessionProvider> */}
+      <SessionProvider>
         <Stack screenOptions={{ headerShown: false }}/>
-      {/* </SessionProvider> */}
+      </SessionProvider>
       <StatusBar style="auto" />
     </ThemeProvider>
   );

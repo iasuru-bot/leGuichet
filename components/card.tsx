@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface CardProps {
   imageUrl: string;
@@ -10,19 +11,26 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ imageUrl, category, heading, authorName, authorDate }) => {
+  // Utilisation des couleurs dynamiques
+  const backgroundColor = useThemeColor({}, 'background');
+  const textColor = useThemeColor({}, 'text');
+  const categoryColor = useThemeColor({}, 'primary');
+  const headingColor = useThemeColor({}, 'secondary');
+  const authorColor = useThemeColor({}, 'gray');
+
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor }]}>
       <ImageBackground
         source={{ uri: imageUrl }}
         style={styles.cardImage}
         imageStyle={styles.cardImageStyle}
       />
-      <Text style={styles.category}>{category}</Text>
+      <Text style={[styles.category, { color: categoryColor }]}>{category}</Text>
       <TouchableOpacity>
-        <Text style={styles.heading}>{heading}</Text>
+        <Text style={[styles.heading, { color: headingColor }]}>{heading}</Text>
       </TouchableOpacity>
       <View style={styles.authorContainer}>
-        <Text style={styles.author}>
+        <Text style={[styles.author, { color: authorColor }]}>
           By <Text style={styles.name}>{authorName}</Text> {authorDate}
         </Text>
       </View>
@@ -33,7 +41,6 @@ const Card: React.FC<CardProps> = ({ imageUrl, category, heading, authorName, au
 const styles = StyleSheet.create({
   card: {
     width: 190,
-    backgroundColor: 'white',
     padding: 8,
     borderRadius: 6,
     shadowColor: '#000',
@@ -41,10 +48,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
+    height:280
   },
   cardImage: {
     width: '100%',
-    height: 130,
+    height: 140,
     borderRadius: 6,
   },
   cardImageStyle: {
@@ -54,19 +62,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 12,
     fontWeight: '600',
-    color: 'rgb(63, 121, 230)',
     paddingBottom: 10,
   },
   heading: {
     fontWeight: '600',
-    color: 'rgb(88, 87, 87)',
     paddingBottom: 7,
   },
   authorContainer: {
     paddingTop: 20,
   },
   author: {
-    color: 'gray',
     fontWeight: '400',
     fontSize: 11,
   },

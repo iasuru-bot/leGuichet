@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import Input from '@/components/input';
 import CustomBackButton from '@/components/customBackButton';
+import SearchBar from '@/components/searchBar';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
