@@ -3,40 +3,39 @@ import { View, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard 
 import { FontAwesome } from '@expo/vector-icons';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useSession } from '@/app/SessionContext';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
+import { HomeScreenNavigationProp } from '@/types/navigation';
 
 const Navbar = () => {
     const [selected, setSelected] = useState('home'); // État pour suivre la page sélectionnée
     const { activeTab, setActiveTab } = useSession(); // Utilisation de useSession pour récupérer la tab active
     const primaryColor = useThemeColor({}, 'primary');
     const white = useThemeColor({}, 'white');
-    const router = useRouter(); // Obtient l'objet router pour la redirection
+    const navigation = useNavigation<HomeScreenNavigationProp>(); // Obtient l'objet navigation pour la redirection
 
     // Mettez à jour l'état de sélection en fonction de la tab active du contexte
     useEffect(() => {
         setSelected(activeTab);
     }, [activeTab]);
 
-    
-
     // Fonction pour changer de sélection
-    const handleSelect = (page: any) => {
+    const handleSelect = (page: string) => {
         setSelected(page);
         setActiveTab(page);
 
-        // Utilisation de router.push() pour rediriger vers la page correspondante
+        // Utilisation de navigation.navigate() pour rediriger vers la page correspondante
         switch (page) {
             case 'home':
-                router.push('./LandingPage');
+                navigation.navigate('Landing');
                 break;
             case 'search':
-                router.push('./LandingPage');
+                navigation.navigate('Landing');
                 break;
             case 'list':
-                router.push('./LandingPage');
+                navigation.navigate('Landing');
                 break;
             case 'user':
-                router.push('./ProfileScreen');
+                navigation.navigate('Profile');
                 break;
             default:
                 break;

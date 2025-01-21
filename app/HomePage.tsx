@@ -1,62 +1,68 @@
-// app/index.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Link, useRouter } from 'expo-router';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import NavigationButton from '@/components/navigationButton';
+import { HomeScreenNavigationProp } from '@/types/navigation';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 const HomePage = () => {
-  const router = useRouter();
+  const backgroundColor = useThemeColor({}, 'background');
+  const textColor = useThemeColor({}, 'text');
+  const primaryColor = useThemeColor({}, 'primary');
+  const secondaryColor = useThemeColor({}, 'secondary');
+  const tertiaryColor = useThemeColor({}, 'tertiary'); 
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.form}>
-        <Text style={styles.title}>Welcome to Le bon commerce</Text>
-        <Text style={styles.message}>Discover, Collect, and Share Virtual Caches!</Text>
-        {/* Register Button */}
-        <NavigationButton title={'Register'} link={'./SignUpForm'}/>
+    <View style={[styles.wrapper , { backgroundColor }]}>
+              
+              <Text style={[styles.title, {color : primaryColor}]}>Le Bon Commerce</Text>
+              <Image source={require('@/assets/images/logo.png')} style={styles.logo} />
+      <View style={[styles.form , { backgroundColor, borderColor: primaryColor }]}>
 
-        {/* Login Button */}
-        <NavigationButton title={'Login'} link={'./LoginForm'}/>
-        <NavigationButton title={'LP'} link={'./LandingPage'}/>
-        <NavigationButton title={'Annonce'} link={'./AnnoncePage'}/>
-
+        <Text style={[styles.message, {color : textColor}]}>Trouvez tout ce qui vous plait !</Text>
+        <NavigationButton title="Se connecter" onPress={() => navigation.navigate('Login')} variant="secondary"/>
+        <NavigationButton title="S'enregistrer" onPress={() => navigation.navigate('SignUp')} variant='primary' />
+        <NavigationButton title="Les annonces" onPress={() => navigation.navigate('Landing')} variant="outlinedPrimary"/>
       </View>
     </View>
   );
 };
 
-// Styles
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#023047',
   },
   form: {
     width: '100%',
     maxWidth: 400,
     padding: 20,
     borderRadius: 20,
-    backgroundColor: '#1a1a1a',
-    borderColor: '#333',
     borderWidth: 1,
     alignItems: 'center',
-    display:'flex',
-    gap:20
+    display: 'flex',
+    gap: 25,
   },
   title: {
     fontSize: 28,
     fontWeight: '600',
-    color: '#00bfff',
     marginBottom: 10,
   },
   message: {
     fontSize: 18,
     marginBottom: 10,
-    color: '#FFFFFF',
     textAlign: 'center',
-  }
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginVertical: 40,
+  },
+
 });
 
 export default HomePage;

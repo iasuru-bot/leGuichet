@@ -1,26 +1,44 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
-interface RegisterButtonProps {
+interface NavigationButtonProps {
   title: string;
-  link: any;
+  onPress: () => void;
+  variant?: 'primary' | 'secondary' | 'outlinedPrimary'; // Variant for the button style
 }
 
-const RegisterButton: React.FC<RegisterButtonProps> = ({ title, link }) => {
-  const router = useRouter();
-  
-  // Utilisation des couleurs dynamiques
-  const buttonBackgroundColor = useThemeColor({}, 'primary');
-  const buttonTextColor = useThemeColor({}, 'white');
+const NavigationButton: React.FC<NavigationButtonProps> = ({ title, onPress, variant = 'primary' }) => {
+  const primaryColor = useThemeColor({}, 'primary');
+  const secondaryColor = useThemeColor({}, 'secondary');
+  const textColor = useThemeColor({}, 'text');
+  const whiteColor = useThemeColor({}, 'white');
+
+  const getButtonStyle = () => {
+    switch (variant) {
+      case 'primary':
+        return [styles.button, { backgroundColor: primaryColor }];
+      case 'secondary':
+        return [styles.button, { backgroundColor: secondaryColor }];
+      case 'outlinedPrimary':
+        return [styles.button, styles.outlinedPrimary, { borderColor: primaryColor }];
+      default:
+        return [styles.button, { backgroundColor: primaryColor }];
+    }
+  };
+
+  const getTextStyle = () => {
+    switch (variant) {
+      case 'outlinedPrimary':
+        return [styles.buttonText, { color: primaryColor }];
+      default:
+        return [styles.buttonText, { color: whiteColor }];
+    }
+  };
 
   return (
-    <TouchableOpacity
-      style={[styles.button, { backgroundColor: buttonBackgroundColor }]}
-      onPress={() => router.push(link)}
-    >
-      <Text style={[styles.buttonText, { color: buttonTextColor }]}>{title}</Text>
+    <TouchableOpacity style={getButtonStyle()} onPress={onPress}>
+      <Text style={getTextStyle()}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -33,6 +51,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
   },
+  outlinedPrimary: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+  },
   buttonText: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -40,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterButton;
+export default NavigationButton;

@@ -1,17 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, ViewStyle, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { FontAwesome } from '@expo/vector-icons';
 
 interface CustomBackButtonProps {
   position?: ViewStyle; // Propriétés de style pour le positionnement
   mode?: 'outlined' | 'primary'; // Propriété pour définir le mode du bouton
-  testID?: string; 
 }
 
 const CustomBackButton: React.FC<CustomBackButtonProps> = ({ position, mode = 'primary' }) => {
-  const router = useRouter();
+  const navigation = useNavigation();
   const primaryColor = useThemeColor({}, "primary");
   const textColor = useThemeColor({}, "text"); // Couleur de texte
 
@@ -21,7 +20,7 @@ const CustomBackButton: React.FC<CustomBackButtonProps> = ({ position, mode = 'p
     <TouchableOpacity
       testID="custom-back-button" 
       style={[styles.button, position, isPrimary ? styles.primaryButton : styles.outlinedButton]} // Applique les styles en fonction du mode
-      onPress={() => router.back()}
+      onPress={() => navigation.goBack()}
     >
       <View style={[styles.circle, isPrimary ? {backgroundColor:primaryColor} : {borderWidth: 2,borderColor:primaryColor}]}>
         <FontAwesome name={"arrow-left"} size={20} color={isPrimary ? textColor : primaryColor} style={styles.icon} />

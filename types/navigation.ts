@@ -1,12 +1,19 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+// filepath: vsls:/LeGuichet/types.tsx
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 export type RootStackParamList = {
   Home: undefined;
-  Profile: { userId: string };
-  // Ajoutez d'autres écrans et leurs paramètres ici
+  SignUp: undefined;
+  Login: undefined;
+  Landing: undefined;
+  Annonce: { id: string };
+  Profile: undefined;
 };
 
-// Définir un type générique pour la navigation
-export type NavigationProps<T extends keyof RootStackParamList> = {
-  navigation: NativeStackNavigationProp<RootStackParamList, T>;
-};
+export type HomeScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
+
+export type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;

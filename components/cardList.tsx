@@ -1,52 +1,48 @@
 import React from 'react';
-import { FlatList, StyleSheet, SafeAreaView, View, Dimensions } from 'react-native';
+import { View, FlatList, SafeAreaView, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Card from './card';
-
-interface CardData {
-  id: string;
-  imageUrl: string;
-  category: string;
-  heading: string;
-  authorName: string;
-  authorDate: string;
-}
+import { CardTypeId } from '@/types/CardType';
+import { HomeScreenNavigationProp } from '@/types/navigation';
 
 interface CardListProps {
-  cards: CardData[];
+  cards: CardTypeId[];
 }
 
 const CardList: React.FC<CardListProps> = ({ cards }) => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const screenWidth = Dimensions.get('window').width;
-
-  // Dynamically determine the number of columns based on screen width
   const numColumns = screenWidth > 400 ? 2 : 1;
 
-  const renderCardItem = ({ item }: { item: CardData }) => (
-    <View style={[styles.card, numColumns === 2 && styles.twoColumnCard]}>
+  const onCardPress = (id: string) => {
+    navigation.navigate('Annonce', { id });
+  };
+
+  const renderCardItem = ({ item }: { item: CardTypeId }) => (
+    <View style={[styles.card]}>
       <Card
         imageUrl={item.imageUrl}
         category={item.category}
         heading={item.heading}
         authorName={item.authorName}
         authorDate={item.authorDate}
+        onPress={() => onCardPress(item.id)}
       />
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
       <FlatList
         data={cards}
         renderItem={renderCardItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         numColumns={numColumns}
         columnWrapperStyle={numColumns > 1 ? styles.row : undefined}
-        contentContainerStyle={[
-          styles.cardList,
-          numColumns === 1 && styles.centerContent, // Center content for one column
-        ]}
-        showsVerticalScrollIndicator={false}
-      />
+        contentContainerStyle={styles.cardList}
+        />
+        </ScrollView>
     </SafeAreaView>
   );
 };
@@ -54,25 +50,24 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
     paddingTop: 12,
+    marginLeft: 6,
+  },
+  scrollView: {
+    flex: 1,
   },
   cardList: {
-    paddingBottom: 16, // Add some padding at the bottom
+    paddingBottom: 16,
   },
   row: {
-    justifyContent: 'space-between', // Space between cards in a row
-  },
-  centerContent: {
-    alignItems: 'center', // Center items horizontally
+    justifyContent: 'space-between',
   },
   card: {
     flex: 1,
-    margin: 6, // Space around each card
-  },
-  twoColumnCard: {
-    maxWidth: '48%', // Adjust card width for two-column layout
-  },
+    margin: 6,
+    alignSelf: 'center',
+    width: '100%',
+  }
 });
 
 export default CardList;

@@ -3,8 +3,24 @@ import styled from 'styled-components/native';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Input from '@/components/input';
 import CustomBackButton from '@/components/customBackButton';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { HomeScreenNavigationProp } from '@/types/navigation';
+import { useNavigation } from 'expo-router';
+import Button from './button';
+
 
 const Form = () => {
+
+  const textColor = useThemeColor({}, 'text');
+  const primaryColor = useThemeColor({}, 'primary');
+  const backgroundColor = useThemeColor({}, 'background');
+  const tertiaryColor = useThemeColor({}, 'tertiary');
+
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const onClick = () => {
+    navigation.navigate('Login');
+  };
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -66,9 +82,9 @@ const Form = () => {
 
   return (
     <StyledWrapper>
-      <CustomBackButton/>
+      <CustomBackButton />
       <StyledForm>
-        <StyledTitle>Register</StyledTitle>
+        <StyledTitle style={{ color: primaryColor }} >Register</StyledTitle>
         <Input
           value={firstName}
           onChange={setFirstName}
@@ -105,11 +121,9 @@ const Form = () => {
           error={errors.confirmPassword}
         />
 
-        <StyledButton>
-          <StyledButtonText onPress={handleSubmit}>Submit</StyledButtonText>
-        </StyledButton>
-        <StyledFooter>
-          Already have an account? <StyledLink>Signin</StyledLink>
+        <Button title="Submit" onPress={handleSubmit} variant="primary" />
+        <StyledFooter style={{ color: textColor }}>
+          Already have an account? <StyledLink style={{ color: primaryColor }} onPress={onClick} >Signin</StyledLink>
         </StyledFooter>
       </StyledForm>
     </StyledWrapper>
@@ -136,18 +150,15 @@ const StyledForm = styled.View`
 const StyledTitle = styled.Text`
   font-size: 28px;
   font-weight: 600;
-  color: #00bfff;
   margin-bottom: 30px;
 `;
 
 const StyledMessage = styled.Text`
   font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 20px;
 `;
 
 const StyledButton = styled.TouchableOpacity`
-  background-color: #00bfff;
   padding: 10px;
   border-radius: 10px;
   align-items: center;
@@ -155,7 +166,6 @@ const StyledButton = styled.TouchableOpacity`
 `;
 
 const StyledButtonText = styled.Text`
-  color: #fff;
   font-size: 16px;
   font-weight: bold;
 `;
@@ -163,11 +173,9 @@ const StyledButtonText = styled.Text`
 const StyledFooter = styled.Text`
   text-align: center;
   margin-top: 15px;
-  color: rgba(255, 255, 255, 0.7);
 `;
 
 const StyledLink = styled.Text`
-  color: #00bfff;
   text-decoration: underline;
 `;
 

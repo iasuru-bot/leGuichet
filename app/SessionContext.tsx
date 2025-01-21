@@ -1,14 +1,5 @@
+import { CardTypeId } from '@/types/CardType';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-
-// Interface des captures / annonces
-export interface CardProps {
-  id: string;
-  imageUrl: string;
-  category: string;
-  heading: string;
-  authorName: string;
-  authorDate: string;
-}
 
 // Interface de l'utilisateur
 export interface UserInfo {
@@ -21,10 +12,11 @@ export interface UserInfo {
 export interface SessionContextType {
   userInfo: UserInfo | null;
   activeTab: string;
-  cards: CardProps[];
+  cards: CardTypeId[];
   setUserInfo: (userInfo: UserInfo) => void;
   setActiveTab: (tab: string) => void;
-  setCards: (cards: CardProps[]) => void;
+  setCards: (cards: CardTypeId[]) => void;
+  resetSession: () => void;
 }
 
 const SessionContext = createContext<SessionContextType | undefined>(undefined);
@@ -38,7 +30,44 @@ interface SessionProviderProps {
 export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [activeTab, setActiveTab] = useState<string>('home');
-  const [cards, setCards] = useState<CardProps[]>([]);
+  const [cards, setCards] = useState<CardTypeId[]>([{
+    imageUrl: 'https://picsum.photos/700',
+    category: 'Immobilier',
+    heading: 'Appartement T3 à louer en centre-ville',
+    authorName: 'Marie Dupont',
+    authorDate: '14 janvier 2025',
+    id: '1',
+  },
+  {
+    imageUrl: 'https://picsum.photos/700',
+    category: 'Véhicules',
+    heading: 'Peugeot 208 d’occasion - 2018',
+    authorName: 'Jean Martin',
+    authorDate: '12 janvier 2025',
+    id: '2',
+  },
+  {
+    imageUrl: 'https://picsum.photos/700',
+    category: 'Electroménager',
+    heading: 'Réfrigérateur Samsung presque neuf',
+    authorName: 'Claire Petit',
+    authorDate: '10 janvier 2025',
+    id: '3',
+  },
+  {
+    imageUrl: 'https://picsum.photos/700',
+    category: 'Multimédia',
+    heading: 'MacBook Pro 2020 - Très bon état',
+    authorName: 'Antoine Bernard',
+    authorDate: '8 janvier 2025',
+    id: '4',
+  }]);
+
+  const resetSession = () => {
+    setUserInfo(null);
+    setActiveTab('home');
+    setCards([]);
+  };
 
   return (
     <SessionContext.Provider
@@ -49,6 +78,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
         setUserInfo,
         setActiveTab,
         setCards,
+        resetSession
       }}
     >
       {children}
@@ -64,3 +94,5 @@ export const useSession = (): SessionContextType => {
   }
   return context;
 };
+
+export default SessionProvider;
