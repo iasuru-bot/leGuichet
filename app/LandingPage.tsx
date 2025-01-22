@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
 import SearchBar from '@/components/searchBar';
-import CardList from '@/components/cardList';
-import Navbar from '@/components/navbar';
+import CardList from '@/components/CardList';
+import Navbar from '@/components/Navbar';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useSession } from './SessionContext';
+import { fetchData } from '@/hooks/fetchData';
 
 const LandingPage = () => {
-  const { cards } = useSession();
+  const { cards, setCards  } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
 
   const backgroundColor = useThemeColor({}, 'background');
   const primaryColor = useThemeColor({}, 'primary');
+
+  const handleSearchSubmit = async () => {
+    try {
+      const response = await fetchData(`/annonce/chercher?query=${searchQuery}`, 'GET');
+      setCards(response);
+    } catch (error) {
+      console.error('Failed to fetch search results:', error);
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -26,7 +36,10 @@ const LandingPage = () => {
 
           {/* Barre de recherche */}
           <View style={styles.searchBar}>
-            <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
+            <SearchBar value={searchQuery}
+              onChangeText={setSearchQuery}
+              onSubmitEditing={handleSearchSubmit}
+            />
           </View>
 
           {/* Liste des cartes */}

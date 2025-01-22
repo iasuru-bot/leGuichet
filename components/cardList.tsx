@@ -2,11 +2,11 @@ import React from 'react';
 import { View, FlatList, SafeAreaView, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Card from './card';
-import { CardTypeId } from '@/types/CardType';
 import { HomeScreenNavigationProp } from '@/types/navigation';
+import { AnnonceType } from '@/types/GlobalType';
 
 interface CardListProps {
-  cards: CardTypeId[];
+  cards: AnnonceType[];
 }
 
 const CardList: React.FC<CardListProps> = ({ cards }) => {
@@ -18,22 +18,24 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
     navigation.navigate('Annonce', { id });
   };
 
-  const renderCardItem = ({ item }: { item: CardTypeId }) => (
+  const renderCardItem = ({ item }: { item: AnnonceType }) => (
     <View style={[styles.card]}>
       <Card
         imageUrl={item.imageUrl}
-        category={item.category}
-        heading={item.heading}
-        authorName={item.authorName}
-        authorDate={item.authorDate}
-        onPress={() => onCardPress(item.id)}
-      />
+        Categorie={item.Categorie}
+        titre={item.titre}
+        Utilisateur={item.Utilisateur}
+        datePublication={item.datePublication}
+        onPress={() => onCardPress(item.id)} 
+        id={item.id} 
+        description={item.description} 
+        prix={item.prix} 
+        statut={item.statut}      />
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
       <FlatList
         data={cards}
         renderItem={renderCardItem}
@@ -42,7 +44,6 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
         columnWrapperStyle={numColumns > 1 ? styles.row : undefined}
         contentContainerStyle={styles.cardList}
         />
-        </ScrollView>
     </SafeAreaView>
   );
 };
@@ -52,9 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
     marginLeft: 6,
-  },
-  scrollView: {
-    flex: 1,
   },
   cardList: {
     paddingBottom: 16,

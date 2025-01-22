@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet,Image, TouchableOpacity } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { CardType } from '@/types/CardType';
+import { AnnonceType } from '@/types/GlobalType';
 
-interface CardProps extends CardType {
+interface CardProps extends AnnonceType {
   onPress: () => void;  
 }
 
-const Card: React.FC<CardProps> = ({ imageUrl, category, heading, authorName, authorDate, onPress }) => {
+const Card: React.FC<CardProps> = ({ imageUrl, Categorie, titre, Utilisateur, datePublication, prix, onPress }) => {
   
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -18,14 +18,16 @@ const Card: React.FC<CardProps> = ({ imageUrl, category, heading, authorName, au
   return (
     <TouchableOpacity style={[styles.card, { backgroundColor ,borderColor:categoryColor }]} onPress={onPress}>
       <Image
-        source={{ uri: imageUrl }}
+        source={{ uri: "https://picsum.photos/700" }}
         style={styles.cardImage}
       />
-      <Text style={[styles.category, { color: categoryColor }]}>{category}</Text>
-      <Text style={[styles.heading, { color: headingColor }]}>{heading}</Text>
+      <Text style={[styles.category, { color: categoryColor }]}>{Categorie.nom}</Text>
+      <Text style={[styles.heading, { color: headingColor }]}>{titre}</Text>
       <View style={styles.authorContainer}>
+        <Text style={[styles.prix, { color: authorColor }]}>
+          {prix} €</Text>
         <Text style={[styles.author, { color: authorColor }]}>
-          By <Text style={styles.name}>{authorName}</Text> {authorDate}
+          By <Text style={styles.name}>{Utilisateur.nom + Utilisateur.prenom}</Text> {new Date(datePublication).toLocaleDateString()}
         </Text>
       </View>
     </TouchableOpacity>
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
   },
   heading: {
     fontWeight: '600',
-    paddingBottom: 7,
+    paddingBottom: 0 ,
   },
   authorContainer: {
     paddingTop: 20,
@@ -70,6 +72,12 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: '600',
+  },
+  prix: {
+    textTransform: 'uppercase',
+    fontSize: 16,
+    fontWeight: '600',
+    paddingBottom: 4,
   },
 });
 

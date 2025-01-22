@@ -1,21 +1,33 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import { CardType } from '@/types/CardType';
+import { AnnonceType } from '@/types/GlobalType';
+import CustomReportButton from '@/components/customReportButton';
+import { Redirect, useNavigation } from 'expo-router';
+import { HomeScreenNavigationProp } from '@/types/navigation';
 
-const Annonce: React.FC<CardType> = ({ heading, category, imageUrl, authorDate, authorName }) => {
+const Annonce: React.FC<AnnonceType> = ({ titre, Categorie, description, Utilisateur, datePublication,statut,prix,imageUrl,id }) => {
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const headingColor = useThemeColor({}, 'tertiary');
   const primaryColor = useThemeColor({}, 'primary');
+  const navigation = useNavigation<HomeScreenNavigationProp>(); // Obtient l'objet navigation pour la redirection
+
+  const onPress = () => {
+    navigation.navigate('ReportPage', { annonceId:id });
+  };
 
   return (
+
     <View style={[styles.annonce, { backgroundColor, borderColor: primaryColor }]}>
-      <Text style={[styles.titre, { color: headingColor }]}>{heading}</Text>
-      <Text style={[styles.categorie, { color: primaryColor }]}><Text style={styles.label}>Catégorie:</Text> {category}</Text>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
-      <Text style={[styles.datePublication, { color: textColor }]}><Text style={styles.label}>Date de publication:</Text> {authorDate}</Text>
-      <Text style={[styles.auteur, { color: textColor }]}><Text style={styles.label}>Publié par:</Text> {authorName}</Text>
+      <CustomReportButton onPress={onPress}/>
+      <Text style={[styles.titre, { color: headingColor }]}>{titre}</Text>
+      <Text style={[styles.categorie, { color: primaryColor }]}><Text style={styles.label}>Catégorie:</Text> {Categorie.nom}</Text>
+      <Image source={{ uri: "https://picsum.photos/700" }} style={styles.image} />
+      <Text style={[styles.prix, { color: textColor }]}>{prix} €</Text>
+      <Text style={[styles.description, { color: textColor }]}>{description}</Text>
+      <Text style={[styles.datePublication, { color: textColor }]}><Text style={styles.label}>Date de publication:</Text> {new Date(datePublication).toLocaleDateString()}</Text>
+      <Text style={[styles.auteur, { color: textColor }]}><Text style={styles.label}>Publié par:</Text> {Utilisateur.prenom + Utilisateur.nom}</Text>
     </View>
   );
 };
@@ -37,7 +49,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 400,
+    height: 300,
     borderRadius: 8,
     marginVertical: 8,
   },
@@ -50,6 +62,17 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
   },
+  prix: {
+    textTransform: 'uppercase',
+    fontSize: 26,
+    fontWeight: '600',
+    paddingTop: 10,
+    paddingBottom: 18,
+  },
+  description : {
+    fontSize : 16,
+    paddingBottom: 25,
+  }
 });
 
 export default Annonce;

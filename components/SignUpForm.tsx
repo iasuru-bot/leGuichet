@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { View, Text, TouchableOpacity } from 'react-native';
-import Input from '@/components/input';
-import CustomBackButton from '@/components/customBackButton';
+import Input from '@/components/Input';
+import CustomBackButton from '@/components/CustomBackButton';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
 import Button from './button';
+import { fetchData } from '@/hooks/fetchData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Form = () => {
 
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'primary');
-  const backgroundColor = useThemeColor({}, 'background');
-  const tertiaryColor = useThemeColor({}, 'tertiary');
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const onClick = () => {
@@ -73,10 +73,20 @@ const Form = () => {
     return isValid;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateForm()) {
-      // Proceed with form submission
-      console.log('Form submitted:', { firstName, lastName, email, password });
+      try {
+        const data = await fetchData('/public/register', 'POST', { nom: lastName, prenom: firstName, email, motDePasse: password });
+        if (data.status === 'Succès') {
+          // Redirect to home page
+          navigation.navigate('Login');
+        }
+        else{
+          setErrors(data.errors);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 

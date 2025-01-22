@@ -9,6 +9,11 @@ export type RootStackParamList = {
   Landing: undefined;
   Annonce: { id: string };
   Profile: undefined;
+  RequestPasswordReset: undefined;
+  AdminHome: undefined;
+  AdminUsers: undefined;
+  AdminReports: undefined;
+  ReportPage: { annonceId: string };
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<

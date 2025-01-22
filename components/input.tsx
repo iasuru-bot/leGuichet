@@ -72,13 +72,13 @@ const StyledTextInput = styled(TextInput)`
 `;
 
 const StyledLabel = styled(Text)<{ isFocused: boolean; color: string }>`
-  font-size: ${({ isFocused }) => (isFocused ? '14px' : '18px')};
+  font-size: ${(props: { isFocused: any; }) => (props.isFocused ? '14px' : '18px')};
   font-weight: normal;
   position: absolute;
   pointer-events: none;
   left: 5px;
-  top: ${({ isFocused }) => (isFocused ? '-20px' : '10px')};
-  color: ${({ color }) => color};
+  top: ${(props: { isFocused: any; }) => (props.isFocused ? '-20px' : '10px')};
+  color: ${(props: { color: any; }) => props.color};
   transition: 0.2s ease all;
 `;
 
@@ -89,8 +89,7 @@ const StyledHighlight = styled.View<{ background: string }>`
   top: 25%;
   left: 0;
   pointer-events: none;
-  opacity: 0.5;
-  background: ${({ background }) => background};
+  opacity: 0.5
 `;
 
 const StyledErrorText = styled.Text`

@@ -1,34 +1,29 @@
 import React from 'react';
-import { Image } from 'react-native';
-import styled from 'styled-components/native';
-import { useNavigation } from '@react-navigation/native';
-import { useThemeColor } from '@/hooks/useThemeColor'; // Récupérer les couleurs du thème
-import Navbar from '@/components/Navbar';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import AdminNavbar from '@/components/AdminNavbar';
 import { useSession } from './SessionContext';
-import CustomBackButton from '@/components/CustomBackButton';
 import Button from '@/components/button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 
-const ProfileScreen = () => {
-  const { userInfo, resetSession } = useSession(); // Récupérer les données de l'utilisateur depuis le contexte
-  const primaryColor = useThemeColor({}, 'primary');
+const AdminProfilePage = () => {
+  const { userInfo, resetSession } = useSession();
   const backgroundColor = useThemeColor({}, 'background');
+  const textColor = useThemeColor({}, 'text');
+  const primaryColor = useThemeColor({}, 'admin');
   const gray = useThemeColor({}, 'gray');
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const handleLogout = async () => {
-    // Supprimer le token de session
     await AsyncStorage.removeItem('userToken');
-    // Réinitialiser les informations de l'utilisateur dans le contexte
     resetSession();
-    // Rediriger vers la page d'accueil
     navigation.navigate('Home');
   };
 
   return (
     <StyledWrapper style={{ backgroundColor }}>
-      <CustomBackButton />
       <StyledProfileHeader>
         <Image source={{ uri: 'https://picsum.photos/700' }} style={styles.profileImage} />
         <StyledUserInfo>
@@ -41,7 +36,7 @@ const ProfileScreen = () => {
         <Button title="Se déconnecter" onPress={handleLogout} variant='logout' />
       </StyledActionsContainer>
 
-      <Navbar />
+      <AdminNavbar />
     </StyledWrapper>
   );
 };
@@ -87,4 +82,4 @@ const styles = {
   },
 };
 
-export default ProfileScreen;
+export default AdminProfilePage;

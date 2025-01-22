@@ -1,42 +1,40 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
 
-const endpoint = "http://localhost:3333"
+const endpoint = "https://9955-185-48-252-9.ngrok-free.app"
 
-export async function fetchData(path: string, method: string, body?: Object, useToken?: boolean) {
+export async function fetchData(path: string, method: string, body?: Object) {
     try {
         const token = await AsyncStorage.getItem('token');
-        let headers = {
+        console.log(path, token);
+        const headers:{ [key: string]: string }= {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         }
-        if(token) {
-            headers = {
-                ...headers,
-                Authorization: 'Bearer ' + token
-            };
+        if(token !== 'undefined') {
+            headers['Authorization'] = '' + token;
         }
-        fetch(endpoint + path, {
+        console.log(headers);
+        return fetch(endpoint + path, {
             method,
             headers,
-            body: JSON.stringify(body),
+            ...(body ? {body: JSON.stringify(body)} : {}),
         })
         .then(response => {
             return response.json()
         })
         .catch(error => {
-            error = JSON.parse(error);
+            // error = JSON.parse(error);
             console.log(error.message);
-            showMessage({
+            return showMessage({
                 message: 'Erreur',
-                description: error.message,
+                description: error,
                 type: 'danger',
                 icon: 'danger',
             });
-            return error;
         });
     } catch (e: any) {
-        console.error(e)
+        console.error('FETCH ERROR', e)
         const error = JSON.parse(e);
         showMessage({
             message: 'Erreur',
@@ -46,5 +44,4 @@ export async function fetchData(path: string, method: string, body?: Object, use
         });
         return error;
     }
-
 }

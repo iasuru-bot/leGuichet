@@ -1,18 +1,20 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { TextInput, IconButton } from 'react-native-paper';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface SearchInputProps {
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
+  onSubmitEditing?: () => void;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChangeText,
   placeholder = 'Search',
+  onSubmitEditing,
 }) => {
   // Utilisation des couleurs du thème
   const primaryColor = useThemeColor({}, 'primary');
@@ -28,10 +30,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
       placeholder={placeholder}
       placeholderTextColor={placeholderColor}
       style={[styles.input, { backgroundColor }]}
-      outlineColor={primaryColor} 
+      outlineColor={primaryColor}
       activeOutlineColor={primaryColor}
-      textColor={textColor} 
-      left={<TextInput.Icon icon="magnify"/>} 
+      textColor={textColor}
+      onSubmitEditing={onSubmitEditing}
+      left={<TextInput.Icon icon="magnify" onPress={onSubmitEditing}/>}
+      right={<TextInput.Icon icon="close" onPress={() => onChangeText('')} />}
     />
   );
 };

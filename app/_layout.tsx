@@ -15,6 +15,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from './ProfileScreen';
 import SignUpPage from './SignUpPage';
 import LoginForm from './LoginForm';
+import RequestPasswordResetForm from './RequestPasswordResetForm';
+import ResetPasswordForm from './ResetPasswordForm';
+import AdminHomePage from './AdminHomePage';
+import AdminUsersPage from './AdminUsersPage';
+import ReportPage from './ReportPage';
+import AdminReportsPage from './AdminReportPage';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -74,6 +80,12 @@ function RootLayoutNav() {
           <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
           <Stack.Screen name="Annonce" component={AnnoncePage} options={{ headerShown: false }} />
           <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="RequestPasswordReset" component={RequestPasswordResetForm} options={{ headerShown: false }} />
+          <Stack.Screen name="ResetPassword" component={ResetPasswordForm} options={{ headerShown: false }} />
+          <Stack.Screen name="AdminHome" component={AdminHomePage} options={{ headerShown: false }} />
+          <Stack.Screen name="AdminUsers" component={AdminUsersPage} options={{ headerShown: false }} />
+          <Stack.Screen name="AdminReports" component={AdminReportsPage} options={{ headerShown: false }} />
+          <Stack.Screen name="ReportPage" component={ReportPage} options={{ headerShown: false }} />
         </Stack.Navigator>
       </SessionProvider>
       <StatusBar style="auto" />

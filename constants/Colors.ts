@@ -20,7 +20,8 @@ export const Colors = {
     white : '#F7F0F0',
     gray : '#DBD3D8',
     black : '#0A0A0A',
-    red : '#D21404'
+    red : '#D21404',
+    admin: '#D63638'
     
   },
   dark: {
@@ -36,6 +37,7 @@ export const Colors = {
     white : '#F7F0F0',
     gray : '#DBD3D8',
     black : '#0A0A0A',
-    red : '#D21404'
+    red : '#D21404',
+    admin: '#D63638'
   },
 };

@@ -3,15 +3,16 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Input from '@/components/input';
+import Input from '@/components/Input';
 import Button from '@/components/button'; // Import the Button component
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useSession } from './SessionContext';
-import CustomBackButton from '@/components/customBackButton';
+import CustomBackButton from '@/components/CustomBackButton';
+import { fetchData } from '@/hooks/fetchData';
 
 const LoginForm = () => {
-  const { setUserInfo } = useSession();
+  const { userInfo, setUserInfo, setCards , setCategories, setActiveTab} = useSession();
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -30,49 +31,49 @@ const LoginForm = () => {
 
   const handleSubmit = async () => {
     let isValid = true;
-
+  
     if (!email.includes('@')) {
       setEmailError('Invalid email');
       isValid = false;
     } else {
       setEmailError('');
     }
-
+  
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters');
       isValid = false;
     } else {
       setPasswordError('');
     }
-
+  
     if (!isValid) {
       return;
     }
-
+  
     try {
-      const response = await fetch('https://your-backend-url.com/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
-      const data = await response.json();
-      const { token, user } = data;
-
+      const data = await fetchData('/public/login', 'POST', { email, motDePasse: password });
+      const { token, utilisateur } = data;
+  
       // Stocker le token dans AsyncStorage
-      await AsyncStorage.setItem('userToken', token);
-
+      await AsyncStorage.setItem('token', token);
+  
       // Mettre à jour les informations de l'utilisateur dans le contexte
-      setUserInfo(user);
+      setUserInfo(utilisateur);
 
-      // Rediriger vers la page d'accueil
-      navigation.navigate('Home');
+      // Recupérer les infos du backend
+      const responseAnnonce = await fetchData('/annonce', 'GET');
+      setCards(responseAnnonce);
+      const responseCategories = await fetchData('/categorie', 'GET');
+      setCategories(responseCategories);
+  
+      if (utilisateur.isAdmin) {
+        setActiveTab("adminHome")
+        navigation.navigate('AdminHome');
+      }else{
+        // Rediriger vers la page d'accueil
+        setActiveTab("Landing")
+        navigation.navigate('Landing');
+      }
     } catch (error) {
       setLoginError('Login failed. Please check your credentials and try again.');
     }
@@ -101,6 +102,9 @@ const LoginForm = () => {
         <Button title="Submit" onPress={handleSubmit} variant="secondary" />
         <StyledFooter style={{ color: textColor }}>
           Don't have an account? <StyledLink onPress={onClick} style={{ color: primaryColor }}>Register</StyledLink>
+        </StyledFooter>
+        <StyledFooter style={{ color: textColor }}>
+          Forgot your password? <StyledLink onPress={() => navigation.navigate('RequestPasswordReset')} style={{ color: primaryColor }}>Reset Password</StyledLink>
         </StyledFooter>
       </StyledForm>
     </StyledWrapper>
@@ -147,3 +151,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginForm;
+

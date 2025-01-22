@@ -10,21 +10,19 @@ const HomePage = () => {
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'primary');
   const secondaryColor = useThemeColor({}, 'secondary');
-  const tertiaryColor = useThemeColor({}, 'tertiary'); 
+  const tertiaryColor = useThemeColor({}, 'tertiary');
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
-    <View style={[styles.wrapper , { backgroundColor }]}>
-              
-              <Text style={[styles.title, {color : primaryColor}]}>Le Bon Commerce</Text>
-              <Image source={require('@/assets/images/logo.png')} style={styles.logo} />
-      <View style={[styles.form , { backgroundColor, borderColor: primaryColor }]}>
+    <View style={[styles.wrapper, { backgroundColor }]}>
 
-        <Text style={[styles.message, {color : textColor}]}>Trouvez tout ce qui vous plait !</Text>
-        <NavigationButton title="Se connecter" onPress={() => navigation.navigate('Login')} variant="secondary"/>
+      <Text style={[styles.title, { color: primaryColor }]}>Le Bon Commerce</Text>
+      <Image source={require('@/assets/images/logo.png')} style={styles.logo} />
+      <View style={[styles.form, { backgroundColor, borderColor: primaryColor }]}>
+        <Text style={[styles.message, { color: textColor }]}>Trouvez tout ce qui vous plait !</Text>
+        <NavigationButton title="Se connecter" onPress={() => navigation.navigate('Login')} variant="secondary" />
         <NavigationButton title="S'enregistrer" onPress={() => navigation.navigate('SignUp')} variant='primary' />
-        <NavigationButton title="Les annonces" onPress={() => navigation.navigate('Landing')} variant="outlinedPrimary"/>
       </View>
     </View>
   );
