@@ -14,11 +14,11 @@ const ReportItem: React.FC<ReportItemProps> = ({ report, onDelete }) => {
     if (onDelete!=undefined) {
         primaryColor = useThemeColor({}, 'admin');
     }
-    const secondaryColor = useThemeColor({}, 'secondary');
+    const tertiaryColor = useThemeColor({}, 'tertiary');
 
     return (
         <View style={[styles.reportItem, { borderColor: primaryColor }]}>
-            <Text style={[styles.reportType, { color: secondaryColor }]}>{report.typeSignalement}</Text>
+            <Text style={[styles.reportType, { color: tertiaryColor }]}>{report.typeSignalement}</Text>
             <Text style={[styles.reportMessage, { color: textColor }]}>{report.message}</Text>
             <Text style={[styles.reportEmail, { color: textColor }]}>{report.email}</Text>
             <Text style={[styles.reportDate, { color: textColor }]}>{new Date(report.dateSignalement).toLocaleDateString()}</Text>

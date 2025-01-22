@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
-
-
 const Loader = () => {
   // Create animation values for each square
   const primaryColor = useThemeColor({}, 'primary');
@@ -56,23 +54,34 @@ const Loader = () => {
   });
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.loadingspinner}>
-        <Animated.View style={[styles.square, { left: 0, top: 0, backgroundColor : primaryColor}, getSquareStyle(square1Animation)]} />
-        <Animated.View style={[styles.square, { left: 0, top: 20, backgroundColor : primaryColor }, getSquareStyle(square2Animation)]} />
-        <Animated.View style={[styles.square, { left: 0, top: 40, backgroundColor : primaryColor}, getSquareStyle(square3Animation)]} />
-        <Animated.View style={[styles.square, { left: 0, top: 60, backgroundColor : primaryColor}, getSquareStyle(square4Animation)]} />
+    <View style={styles.overlay}>
+      <View style={styles.wrapper}>
+        <View style={styles.loadingspinner}>
+          <Animated.View style={[styles.square, { left: 0, top: 0, backgroundColor: primaryColor }, getSquareStyle(square1Animation)]} />
+          <Animated.View style={[styles.square, { left: 0, top: 20, backgroundColor: primaryColor }, getSquareStyle(square2Animation)]} />
+          <Animated.View style={[styles.square, { left: 0, top: 40, backgroundColor: primaryColor }, getSquareStyle(square3Animation)]} />
+          <Animated.View style={[styles.square, { left: 0, top: 60, backgroundColor: primaryColor }, getSquareStyle(square4Animation)]} />
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Translucent gray background
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 30,
   },
   loadingspinner: {
     width: 120,

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import Input from '@/components/Input';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import CustomBackButton from '@/components/CustomBackButton';
 import { fetchData } from '@/hooks/fetchData';
@@ -15,6 +15,7 @@ const RequestPasswordResetForm = () => {
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
+  
 
   const handleSubmit = async () => {
     try {

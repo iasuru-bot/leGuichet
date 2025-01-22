@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
-import SearchBar from '@/components/searchBar';
 import CardList from '@/components/CardList';
-import Navbar from '@/components/Navbar';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { useSession } from './SessionContext';
 import { fetchData } from '@/hooks/fetchData';
+import Navbar from '@/components/Navbar';
+import SearchBar from '@/components/SearchBar';
+import { useLoading } from './LoadingContext';
 
 const LandingPage = () => {
   const { cards, setCards  } = useSession();
@@ -13,10 +14,11 @@ const LandingPage = () => {
 
   const backgroundColor = useThemeColor({}, 'background');
   const primaryColor = useThemeColor({}, 'primary');
+  const { setLoading } = useLoading();
 
   const handleSearchSubmit = async () => {
     try {
-      const response = await fetchData(`/annonce/chercher?query=${searchQuery}`, 'GET');
+      const response = await fetchData(`/annonce/chercher?query=${searchQuery}`, 'GET',undefined, setLoading);
       setCards(response);
     } catch (error) {
       console.error('Failed to fetch search results:', error);

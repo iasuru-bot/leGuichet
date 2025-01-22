@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { View, Text, TouchableOpacity } from 'react-native';
 import Input from '@/components/Input';
 import CustomBackButton from '@/components/CustomBackButton';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useNavigation } from 'expo-router';
-import Button from './button';
+
 import { fetchData } from '@/hooks/fetchData';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Button from './Button';
 
 
 const Form = () => {
 
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'primary');
+
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const onClick = () => {

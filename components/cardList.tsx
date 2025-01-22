@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, SafeAreaView, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Card from './card';
+import Card from './Card';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { AnnonceType } from '@/types/GlobalType';
 

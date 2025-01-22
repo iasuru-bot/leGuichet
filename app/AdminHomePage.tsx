@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
-import Navbar from '@/components/Navbar';
 import CardList from '@/components/CardList';
 import { useSession } from './SessionContext';
 import AdminNavbar from '@/components/AdminNavbar';

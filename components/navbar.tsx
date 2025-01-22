@@ -28,11 +28,9 @@ const Navbar = () => {
             case 'home':
                 navigation.navigate('Landing');
                 break;
-            case 'search':
-                navigation.navigate('Landing');
-                break;
+
             case 'list':
-                navigation.navigate('Landing');
+                navigation.navigate('CreateAnnonce');
                 break;
             case 'user':
                 navigation.navigate('Profile');
@@ -51,12 +49,6 @@ const Navbar = () => {
                         onPress={() => handleSelect('home')}
                     >
                         <FontAwesome name="home" size={30} color={selected === 'home' ? primaryColor : white} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.button, selected === 'search' && styles.selectedButton]}
-                        onPress={() => handleSelect('search')}
-                    >
-                        <FontAwesome name="search" size={25} color={selected === 'search' ? primaryColor : white} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.button, selected === 'list' && styles.selectedButton]}

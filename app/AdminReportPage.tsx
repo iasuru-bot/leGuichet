@@ -5,6 +5,7 @@ import AdminNavbar from '@/components/AdminNavbar';
 import { fetchData } from '@/hooks/fetchData';
 import { SignalementType } from '@/types/GlobalType';
 import ReportList from '@/components/ReportList';
+import { useLoading } from './LoadingContext';
 
 const AdminReportsPage = () => {
   const [reports, setReports] = useState<SignalementType[]>([]);
@@ -14,11 +15,12 @@ const AdminReportsPage = () => {
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'admin');
+  const { setLoading } = useLoading();
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetchData('/signalement', 'GET');
+        const response = await fetchData('/signalement', 'GET',undefined, setLoading);
         setReports(response);
       } catch (error) {
         console.error('Failed to fetch reports:', error);
@@ -30,7 +32,7 @@ const AdminReportsPage = () => {
 
   const handleDeleteReport = async (id: string) => {
     try {
-      await fetchData(`/admin/signalement/${id}`, 'DELETE');
+      await fetchData(`/admin/signalement/${id}`, 'DELETE',undefined, setLoading);
       setReports((prevReports) => prevReports.filter((report) => report.id !== id));
       setIsModalVisible(false);
     } catch (error) {

@@ -5,6 +5,7 @@ import AdminNavbar from '@/components/AdminNavbar';
 import { fetchData } from '@/hooks/fetchData';
 import { UserType } from '@/types/GlobalType';
 import UserItem from '@/components/UserItem';
+import { useLoading } from './LoadingContext';
 
 const AdminUsersPage = () => {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -14,11 +15,12 @@ const AdminUsersPage = () => {
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'admin');
-
+  
+  const { setLoading } = useLoading();
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetchData('/utilisateur', 'GET');
+        const response = await fetchData('/utilisateur', 'GET',undefined, setLoading);
         setUsers(response);
       } catch (error) {
         console.error('Failed to fetch users:', error);
@@ -30,7 +32,7 @@ const AdminUsersPage = () => {
 
   const handleDeleteUser = async (id: string) => {
     try {
-      await fetchData(`/admin/user/${id}`, 'DELETE');
+      await fetchData(`/admin/user/${id}`, 'DELETE',undefined, setLoading);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
       setIsModalVisible(false);
     } catch (error) {

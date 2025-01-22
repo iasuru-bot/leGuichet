@@ -35,7 +35,7 @@ const AdminNavbar = () => {
                 navigation.navigate('AdminReports');
                 break;
             case 'user':
-                navigation.navigate('Profile');
+                navigation.navigate('AdminProfile');
                 break;
             default:
                 break;

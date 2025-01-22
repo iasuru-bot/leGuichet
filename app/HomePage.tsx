@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import NavigationButton from '@/components/navigationButton';
+import NavigationButton from '@/components/NavigationButton';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
@@ -9,8 +9,6 @@ const HomePage = () => {
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'primary');
-  const secondaryColor = useThemeColor({}, 'secondary');
-  const tertiaryColor = useThemeColor({}, 'tertiary');
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 

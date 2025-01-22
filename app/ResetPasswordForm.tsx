@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import Input from '@/components/Input';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import CustomBackButton from '@/components/CustomBackButton';

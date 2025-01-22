@@ -8,9 +8,8 @@ import HomePage from './HomePage';
 import LandingPage from './LandingPage';
 import AnnoncePage from './AnnoncePage';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import Loader from '@/components/loader';
+import Loader from '@/components/Loader';
 import { SessionProvider } from './SessionContext';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import ProfileScreen from './ProfileScreen';
 import SignUpPage from './SignUpPage';
@@ -21,19 +20,25 @@ import AdminHomePage from './AdminHomePage';
 import AdminUsersPage from './AdminUsersPage';
 import ReportPage from './ReportPage';
 import AdminReportsPage from './AdminReportPage';
+import AdminProfilePage from './AdminProfilePage';
+import CreateAnnonce from './CreateAnnonce';
+import {LoadingProvider} from './LoadingContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+const Stack = createStackNavigator();
 export default function RootLayout() {
   const [loaded, setLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
 
+  const colorScheme = useColorScheme();
+  
   useEffect(() => {
     async function prepare() {
       try {
         // Simuler un délai pour le loader
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 100));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -47,46 +52,34 @@ export default function RootLayout() {
   }, []);
 
   if (!loaded || showLoader) {
-    return <Loader />;
-  }
-
-  return <RootLayoutNav />;
-}
-
-const Stack = createStackNavigator();
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
+    return (
+      <LoadingProvider>
+        <Loader />
+      </LoadingProvider>
+    );
   }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <SessionProvider>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
-          <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }} />
-          <Stack.Screen name="Login" component={LoginForm} options={{ headerShown: false }} />
-          <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
-          <Stack.Screen name="Annonce" component={AnnoncePage} options={{ headerShown: false }} />
-          <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="RequestPasswordReset" component={RequestPasswordResetForm} options={{ headerShown: false }} />
-          <Stack.Screen name="ResetPassword" component={ResetPasswordForm} options={{ headerShown: false }} />
-          <Stack.Screen name="AdminHome" component={AdminHomePage} options={{ headerShown: false }} />
-          <Stack.Screen name="AdminUsers" component={AdminUsersPage} options={{ headerShown: false }} />
-          <Stack.Screen name="AdminReports" component={AdminReportsPage} options={{ headerShown: false }} />
-          <Stack.Screen name="ReportPage" component={ReportPage} options={{ headerShown: false }} />
-        </Stack.Navigator>
+        <LoadingProvider>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+            <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }} />
+            <Stack.Screen name="Login" component={LoginForm} options={{ headerShown: false }} />
+            <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
+            <Stack.Screen name="Annonce" component={AnnoncePage} options={{ headerShown: false }} />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="RequestPasswordReset" component={RequestPasswordResetForm} options={{ headerShown: false }} />
+            <Stack.Screen name="ResetPassword" component={ResetPasswordForm} options={{ headerShown: false }} />
+            <Stack.Screen name="AdminHome" component={AdminHomePage} options={{ headerShown: false }} />
+            <Stack.Screen name="AdminUsers" component={AdminUsersPage} options={{ headerShown: false }} />
+            <Stack.Screen name="AdminReports" component={AdminReportsPage} options={{ headerShown: false }} />
+            <Stack.Screen name="AdminProfile" component={AdminProfilePage} options={{ headerShown: false }} />
+            <Stack.Screen name="ReportPage" component={ReportPage} options={{ headerShown: false }} />
+            <Stack.Screen name="CreateAnnonce" component={CreateAnnonce} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </LoadingProvider>
       </SessionProvider>
       <StatusBar style="auto" />
     </ThemeProvider>

@@ -2,16 +2,15 @@ import React from 'react';
 import { Image } from 'react-native';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import { useThemeColor } from '@/hooks/useThemeColor'; // Récupérer les couleurs du thème
+import { useThemeColor } from '@/hooks/useThemeColor';
 import Navbar from '@/components/Navbar';
 import { useSession } from './SessionContext';
-import CustomBackButton from '@/components/CustomBackButton';
-import Button from '@/components/button';
+import Button from '@/components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 
 const ProfileScreen = () => {
-  const { userInfo, resetSession } = useSession(); // Récupérer les données de l'utilisateur depuis le contexte
+  const { userInfo, resetSession } = useSession();
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const gray = useThemeColor({}, 'gray');
@@ -28,7 +27,6 @@ const ProfileScreen = () => {
 
   return (
     <StyledWrapper style={{ backgroundColor }}>
-      <CustomBackButton />
       <StyledProfileHeader>
         <Image source={{ uri: 'https://picsum.photos/700' }} style={styles.profileImage} />
         <StyledUserInfo>

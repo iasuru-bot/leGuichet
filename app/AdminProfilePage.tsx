@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import AdminNavbar from '@/components/AdminNavbar';
 import { useSession } from './SessionContext';
-import Button from '@/components/button';
+import Button from '@/components/Button';
+import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { HomeScreenNavigationProp } from '@/types/navigation';
@@ -11,7 +12,6 @@ import { HomeScreenNavigationProp } from '@/types/navigation';
 const AdminProfilePage = () => {
   const { userInfo, resetSession } = useSession();
   const backgroundColor = useThemeColor({}, 'background');
-  const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'admin');
   const gray = useThemeColor({}, 'gray');
   const navigation = useNavigation<HomeScreenNavigationProp>();

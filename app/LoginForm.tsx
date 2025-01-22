@@ -4,15 +4,17 @@ import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from '@/components/Input';
-import Button from '@/components/button'; // Import the Button component
+import Button from '@/components/Button'; 
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useSession } from './SessionContext';
 import CustomBackButton from '@/components/CustomBackButton';
 import { fetchData } from '@/hooks/fetchData';
 
+import { useLoading } from './LoadingContext';
+
 const LoginForm = () => {
-  const { userInfo, setUserInfo, setCards , setCategories, setActiveTab} = useSession();
+  const {  setUserInfo, setCards , setCategories, setActiveTab} = useSession();
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -51,6 +53,7 @@ const LoginForm = () => {
     }
   
     try {
+
       const data = await fetchData('/public/login', 'POST', { email, motDePasse: password });
       const { token, utilisateur } = data;
   
@@ -59,11 +62,12 @@ const LoginForm = () => {
   
       // Mettre à jour les informations de l'utilisateur dans le contexte
       setUserInfo(utilisateur);
+      
 
       // Recupérer les infos du backend
-      const responseAnnonce = await fetchData('/annonce', 'GET');
+      const responseAnnonce = await fetchData('/annonce', 'GET',undefined);
       setCards(responseAnnonce);
-      const responseCategories = await fetchData('/categorie', 'GET');
+      const responseCategories = await fetchData('/categorie', 'GET',undefined);
       setCategories(responseCategories);
   
       if (utilisateur.isAdmin) {

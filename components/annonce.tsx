@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { AnnonceType } from '@/types/GlobalType';
-import CustomReportButton from '@/components/customReportButton';
+import CustomReportButton from '@/components/CustomReportButton';
 import { Redirect, useNavigation } from 'expo-router';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 

@@ -8,6 +8,7 @@ import { useSession } from './SessionContext';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import CustomBackButton from '@/components/CustomBackButton';
 
+import { useLoading } from './LoadingContext';
 import { fetchData } from '@/hooks/fetchData';
 
 type AnnoncePageRouteProp = RouteProp<RootStackParamList, 'Annonce'>;
@@ -17,9 +18,8 @@ const AnnoncePage = () => {
   const { id } = route.params;
   const { cards ,setSignalements } = useSession();
 
-  const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
-  const textColor = useThemeColor({}, 'text');
+  const { setLoading } = useLoading();
 
   // Fetch the annonce data based on the id from the session
   const annonceData = cards.find((card) => card.id === id);
@@ -27,7 +27,7 @@ const AnnoncePage = () => {
   useEffect(() => {
     const fetchSignalements = async () => {
       try {
-        const responseSignalements = await fetchData(`/annonce/${id}/signalements`, 'GET');
+        const responseSignalements = await fetchData(`/annonce/${id}/signalements`, 'GET',undefined, setLoading);
         setSignalements(responseSignalements);
       } catch (error) {
         console.error('Failed to fetch signalements:', error);
