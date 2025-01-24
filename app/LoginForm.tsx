@@ -4,17 +4,15 @@ import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from '@/components/Input';
-import Button from '@/components/Button'; 
+import Button from '@/components/Button';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useSession } from './SessionContext';
 import CustomBackButton from '@/components/CustomBackButton';
 import { fetchData } from '@/hooks/fetchData';
 
-import { useLoading } from './LoadingContext';
-
 const LoginForm = () => {
-  const {  setUserInfo, setCards , setCategories, setActiveTab} = useSession();
+  const { setUserInfo, setCards, setCategories, setActiveTab } = useSession();
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -33,47 +31,49 @@ const LoginForm = () => {
 
   const handleSubmit = async () => {
     let isValid = true;
-  
+
     if (!email.includes('@')) {
       setEmailError('Invalid email');
       isValid = false;
     } else {
       setEmailError('');
     }
-  
+
     if (password.length < 6) {
       setPasswordError('Password must be at least 6 characters');
       isValid = false;
     } else {
       setPasswordError('');
     }
-  
+
     if (!isValid) {
       return;
     }
-  
+
     try {
 
       const data = await fetchData('/public/login', 'POST', { email, motDePasse: password });
       const { token, utilisateur } = data;
-  
+
       // Stocker le token dans AsyncStorage
       await AsyncStorage.setItem('token', token);
-  
+
       // Mettre à jour les informations de l'utilisateur dans le contexte
       setUserInfo(utilisateur);
-      
+
 
       // Recupérer les infos du backend
-      const responseAnnonce = await fetchData('/annonce', 'GET',undefined);
+      const responseAnnonce = await fetchData('/annonce', 'GET', undefined);
+      console.log(responseAnnonce);
+      
       setCards(responseAnnonce);
-      const responseCategories = await fetchData('/categorie', 'GET',undefined);
+      const responseCategories = await fetchData('/categorie', 'GET', undefined);
       setCategories(responseCategories);
-  
+
       if (utilisateur.isAdmin) {
         setActiveTab("adminHome")
         navigation.navigate('AdminHome');
-      }else{
+      } else {
         // Rediriger vers la page d'accueil
         setActiveTab("Landing")
         navigation.navigate('Landing');

@@ -5,13 +5,12 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 interface NavigationButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary' | 'outlinedPrimary'; // Variant for the button style
+  variant?: 'primary' | 'secondary' | 'outlinedPrimary';
 }
 
 const NavigationButton: React.FC<NavigationButtonProps> = ({ title, onPress, variant = 'primary' }) => {
   const primaryColor = useThemeColor({}, 'primary');
   const secondaryColor = useThemeColor({}, 'secondary');
-  const textColor = useThemeColor({}, 'text');
   const whiteColor = useThemeColor({}, 'white');
 
   const getButtonStyle = () => {

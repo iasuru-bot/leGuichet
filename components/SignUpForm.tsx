@@ -78,10 +78,10 @@ const Form = () => {
       try {
         const data = await fetchData('/public/register', 'POST', { nom: lastName, prenom: firstName, email, motDePasse: password });
         if (data.status === 'Succès') {
-          // Redirect to home page
+
           navigation.navigate('Login');
         }
-        else{
+        else {
           setErrors(data.errors);
         }
       } catch (error) {

@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, ImageBackground, StyleSheet,Image, TouchableOpacity } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { AnnonceType } from '@/types/GlobalType';
+import { endpoint } from '@/constants/Other';
 
 interface CardProps extends AnnonceType {
   onPress: () => void;  
 }
 
-const Card: React.FC<CardProps> = ({ imageUrl, Categorie, titre, Utilisateur, datePublication, prix, onPress }) => {
+const Card: React.FC<CardProps> = ({ filePath, Categorie, titre, Utilisateur, datePublication, prix, onPress }) => {
   
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
@@ -15,10 +16,11 @@ const Card: React.FC<CardProps> = ({ imageUrl, Categorie, titre, Utilisateur, da
   const headingColor = useThemeColor({}, 'tertiary');
   const authorColor = useThemeColor({}, 'gray');
 
+  const createUri = endpoint + "/public/serve/" + filePath.split('/').pop();
   return (
     <TouchableOpacity style={[styles.card, { backgroundColor ,borderColor:categoryColor }]} onPress={onPress}>
       <Image
-        source={{ uri: "https://picsum.photos/700" }}
+        source={{ uri: createUri }}
         style={styles.cardImage}
       />
       <Text style={[styles.category, { color: categoryColor }]}>{Categorie.nom}</Text>

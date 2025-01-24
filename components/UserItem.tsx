@@ -17,7 +17,7 @@ const UserItem: React.FC<UserItemProps> = ({ user, onDelete }) => {
     <View style={[styles.userItem, { borderColor: primaryColor }]}>
       <Text style={[styles.userName, { color: textColor }]}>{user.prenom} {user.nom}</Text>
       <Text style={[styles.userEmail, { color: textColor }]}>{user.email}</Text>
-      <TouchableOpacity style={[styles.deleteButton, { backgroundColor: primaryColor }]} onPress={()=> onDelete(user.id)}>
+      <TouchableOpacity style={[styles.deleteButton, { backgroundColor: primaryColor }]} onPress={() => onDelete(user.id)}>
         <Text style={styles.deleteButtonText}>Delete</Text>
       </TouchableOpacity>
     </View>

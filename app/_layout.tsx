@@ -1,5 +1,4 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
@@ -22,9 +21,8 @@ import ReportPage from './ReportPage';
 import AdminReportsPage from './AdminReportPage';
 import AdminProfilePage from './AdminProfilePage';
 import CreateAnnonce from './CreateAnnonce';
-import {LoadingProvider} from './LoadingContext';
+import { LoadingProvider } from './LoadingContext';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
@@ -33,7 +31,7 @@ export default function RootLayout() {
   const [showLoader, setShowLoader] = useState(true);
 
   const colorScheme = useColorScheme();
-  
+
   useEffect(() => {
     async function prepare() {
       try {

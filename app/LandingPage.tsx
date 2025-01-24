@@ -9,7 +9,7 @@ import SearchBar from '@/components/SearchBar';
 import { useLoading } from './LoadingContext';
 
 const LandingPage = () => {
-  const { cards, setCards  } = useSession();
+  const { cards, setCards } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
 
   const backgroundColor = useThemeColor({}, 'background');
@@ -18,7 +18,7 @@ const LandingPage = () => {
 
   const handleSearchSubmit = async () => {
     try {
-      const response = await fetchData(`/annonce/chercher?query=${searchQuery}`, 'GET',undefined, setLoading);
+      const response = await fetchData(`/annonce/chercher?query=${searchQuery}`, 'GET', undefined, setLoading);
       setCards(response);
     } catch (error) {
       console.error('Failed to fetch search results:', error);

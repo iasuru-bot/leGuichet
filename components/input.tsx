@@ -25,7 +25,7 @@ const Input: React.FC<InputProps> = ({
   keyboardType = 'default',
 }) => {
   const [isFocused, setIsFocused] = useState(false);
-  
+
   // Utilisation des couleurs du thème
   const primaryColor = useThemeColor({}, 'primary');
   const white = useThemeColor({}, 'white');
@@ -46,7 +46,7 @@ const Input: React.FC<InputProps> = ({
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
           style={{ borderBottomColor: isFocused ? primaryColor : gray }}
-          color = {text}
+          color={text}
         />
         <StyledLabel isFocused={isFocused || !!value} color={isFocused ? primaryColor : gray}>
           {label}
@@ -71,7 +71,7 @@ const StyledTextInput = styled(TextInput)`
   background: transparent;
 `;
 
-const StyledLabel = styled(Text)<{ isFocused: boolean; color: string }>`
+const StyledLabel = styled(Text) <{ isFocused: boolean; color: string }>`
   font-size: ${(props: { isFocused: any; }) => (props.isFocused ? '14px' : '18px')};
   font-weight: normal;
   position: absolute;

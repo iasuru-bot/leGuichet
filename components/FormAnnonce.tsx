@@ -37,7 +37,7 @@ const FormAnnonce: React.FC<FormAnnonceProps> = ({ onClose }) => {
     }
   };
 
- const handleSubmit = async () => {
+  const handleSubmit = async () => {
     if (!titre || !description || !prix || !categorieId) {
       setError('Tous les champs doivent être remplis');
       return;
@@ -45,7 +45,7 @@ const FormAnnonce: React.FC<FormAnnonceProps> = ({ onClose }) => {
 
     let filePath = '';
     if (file) {
-      const fileData:any = new FormData();
+      const fileData: any = new FormData();
       const fileBlob = await fetch(file.uri).then(r => r.blob());
       fileData.append('file', fileBlob, file.name);
 
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonSpacing: {
-    height: 10, // Espace entre les boutons
+    height: 10,
   },
   buttonContainer: {
     width: 'auto',

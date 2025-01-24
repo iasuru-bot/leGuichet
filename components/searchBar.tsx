@@ -16,7 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = 'Search',
   onSubmitEditing,
 }) => {
-  // Utilisation des couleurs du thème
+
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const placeholderColor = useThemeColor({}, 'gray');
@@ -34,7 +34,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       activeOutlineColor={primaryColor}
       textColor={textColor}
       onSubmitEditing={onSubmitEditing}
-      left={<TextInput.Icon icon="magnify" onPress={onSubmitEditing}/>}
+      left={<TextInput.Icon icon="magnify" onPress={onSubmitEditing} />}
       right={<TextInput.Icon icon="close" onPress={() => onChangeText('')} />}
     />
   );

@@ -26,7 +26,7 @@ const ReportPage = () => {
   useEffect(() => {
     const fetchSignalements = async () => {
       try {
-        const responseSignalements = await fetchData(`/annonce/${annonceId}/signalements`, 'GET',undefined, setLoading);
+        const responseSignalements = await fetchData(`/annonce/${annonceId}/signalements`, 'GET', undefined, setLoading);
         setSignalements(responseSignalements);
       } catch (error) {
         console.error('Failed to fetch signalements:', error);
@@ -38,7 +38,6 @@ const ReportPage = () => {
 
   const handleFormClose = () => {
     setShowForm(false);
-    //fetchSignalements();
   };
 
   return (

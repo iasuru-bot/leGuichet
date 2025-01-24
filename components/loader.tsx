@@ -3,39 +3,37 @@ import { View, Animated, StyleSheet } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 const Loader = () => {
-  // Create animation values for each square
+
   const primaryColor = useThemeColor({}, 'primary');
   const square1Animation = new Animated.Value(0);
   const square2Animation = new Animated.Value(0);
   const square3Animation = new Animated.Value(0);
   const square4Animation = new Animated.Value(0);
 
-  // Function to animate squares in sequence with a 3 second delay between each animation
   const startAnimations = () => {
     Animated.sequence([
-      // First forward animation (appear)
+
       Animated.timing(square1Animation, { toValue: 1, duration: 500, useNativeDriver: true }),
       Animated.timing(square2Animation, { toValue: 1, duration: 500, useNativeDriver: true }),
       Animated.timing(square3Animation, { toValue: 1, duration: 500, useNativeDriver: true }),
       Animated.timing(square4Animation, { toValue: 1, duration: 500, useNativeDriver: true }),
 
-      // Inverse animation (disappear), reverse the values for each square
       Animated.timing(square4Animation, { toValue: 0, duration: 500, useNativeDriver: true }),
       Animated.timing(square3Animation, { toValue: 0, duration: 500, useNativeDriver: true }),
       Animated.timing(square2Animation, { toValue: 0, duration: 500, useNativeDriver: true }),
       Animated.timing(square1Animation, { toValue: 0, duration: 500, useNativeDriver: true }),
     ]).start(() => {
-      // Reset all animations and restart the sequence
+
       square1Animation.setValue(0);
       square2Animation.setValue(0);
       square3Animation.setValue(0);
       square4Animation.setValue(0);
-      startAnimations(); // Restart the sequence
+      startAnimations(); 
     });
   };
 
   useEffect(() => {
-    startAnimations(); // Start the animation when the component mounts
+    startAnimations(); 
   }, []);
 
   const getSquareStyle = (animation: Animated.Value) => ({
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Translucent gray background
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,

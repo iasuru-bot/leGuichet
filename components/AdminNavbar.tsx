@@ -23,7 +23,6 @@ const AdminNavbar = () => {
         setSelected(page);
         setActiveTab(page);
 
-        // Utilisation de navigation.navigate() pour rediriger vers la page correspondante
         switch (page) {
             case 'adminHome':
                 navigation.navigate('AdminHome');
@@ -81,7 +80,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 25,
         width: '100%',
-        alignItems: 'center', // Center the navbar horizontally
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -98,13 +97,13 @@ const styles = StyleSheet.create({
     button: {
         width: 40,
         height: 40,
-        borderRadius: 20, // Full circle
+        borderRadius: 20,
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
     },
     selectedButton: {
-        backgroundColor: 'white', // Rond blanc pour l'élément sélectionné
+        backgroundColor: 'white',
     },
 });
 

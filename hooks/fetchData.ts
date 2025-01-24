@@ -1,8 +1,7 @@
 import { useLoading } from "@/app/LoadingContext";
+import { endpoint } from "@/constants/Other";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
-
-const endpoint = "https://6882-185-48-252-9.ngrok-free.app";
 
 export async function fetchData(path: string, method: string, body?: Object, setLoading?: (loading: boolean) => void) {
   try {

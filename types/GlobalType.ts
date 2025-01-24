@@ -12,7 +12,7 @@ export type AnnonceType = {
         nom: string;
         prenom: string;
     };
-    imageUrl: string;
+    filePath: string;
 }
 
 export type UserType = {

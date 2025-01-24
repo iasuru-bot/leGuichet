@@ -64,7 +64,7 @@ const StyledTextInput = styled(TextInput)`
   background: transparent;
 `;
 
-const StyledLabel = styled(Text)<{ isFocused: boolean; color: string }>`
+const StyledLabel = styled(Text) <{ isFocused: boolean; color: string }>`
   font-size: ${(props: { isFocused: any; }) => (props.isFocused ? '14px' : '18px')};
   font-weight: normal;
   position: absolute;

@@ -10,7 +10,6 @@ interface CheckboxProps {
 const Checkbox: React.FC<CheckboxProps> = ({ defaultChecked = false, onToggle }) => {
   const [isChecked, setIsChecked] = useState(defaultChecked);
 
-  // Récupère les couleurs depuis le thème
   const primaryColor = useThemeColor({}, 'primary');
   const checkmarkColor = useThemeColor({}, 'text');
 

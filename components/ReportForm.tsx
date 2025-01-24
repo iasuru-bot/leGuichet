@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonSpacing: {
-    height: 10, // Espace entre les boutons
+    height: 10,
   },
 });
 

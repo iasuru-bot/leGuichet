@@ -1,50 +1,108 @@
-# Welcome to your Expo app 👋
+# LeGuichet Frontend
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Description
+LeGuichet est une application frontend développée avec Expo et React Native. Cette application permet aux utilisateurs de naviguer et d'interagir avec les annonces, les catégories, et les utilisateurs gérés par l'API backend Mon Annonce.
 
-## Get started
+## Prérequis
+- Node.js
+- Expo CLI
 
-1. Install dependencies
+## Installation
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### Cloner le projet
 ```bash
-npm run reset-project
+git clone <URL> LeGuichet && cd LeGuichet
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Installer les dépendances
+```bash
+npm install
+```
 
-## Learn more
+### Démarrer l'application
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Dans la sortie, vous trouverez des options pour ouvrir l'application dans un :
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- [build de développement](https://docs.expo.dev/develop/development-builds/introduction/)
+- [émulateur Android](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [simulateur iOS](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), un bac à sable limité pour essayer le développement d'applications avec Expo
 
-## Join the community
+Vous pouvez commencer à développer en éditant les fichiers à l'intérieur du répertoire **app**. Ce projet utilise le [routage basé sur les fichiers](https://docs.expo.dev/router/introduction).
 
-Join our community of developers creating universal apps.
+## Structure du projet
+```
+LeGuichet/
+├── .gitignore
+├── app/
+│   ├── HomePage.tsx
+│   ├── LandingPage.tsx
+│   ├── AnnoncePage.tsx
+│   ├── ReportPage.tsx
+│   ├── CreateAnnonce.tsx
+│   ├── ProfileScreen.tsx
+│   ├── SignUpPage.tsx
+│   ├── LoginForm.tsx
+│   ├── RequestPasswordResetForm.tsx
+│   ├── ResetPasswordForm.tsx
+│   ├── AdminHomePage.tsx
+│   ├── AdminUsersPage.tsx
+│   ├── AdminReportsPage.tsx
+│   ├── AdminProfilePage.tsx
+│   ├── _layout.tsx
+│   └── index.tsx
+├── components/
+│   ├── Annonce.tsx
+│   ├── Card.tsx
+│   ├── CardList.tsx
+│   ├── ReportForm.tsx
+│   ├── ReportItem.tsx
+│   ├── ReportList.tsx
+│   ├── Button.tsx
+│   ├── Input.tsx
+│   ├── InputMultiligne.tsx
+│   ├── CustomBackButton.tsx
+│   ├── CustomReportButton.tsx
+│   ├── Navbar.tsx
+│   ├── AdminNavbar.tsx
+│   └── Loader.tsx
+├── hooks/
+│   ├── useThemeColor.ts
+│   ├── fetchData.ts
+│   └── useColorScheme.ts
+├── assets/
+│   ├── images/
+│   │   └── logo.png
+├── .gitignore
+├── app.json
+├── package.json
+└── README.md
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Modes d'utilisation
+
+### Mode Administrateur
+Pour accéder au mode administrateur, vous devez vous connecter avec un compte administrateur. Une fois connecté en tant qu'administrateur, vous aurez accès à des fonctionnalités supplémentaires telles que :
+- Gestion des utilisateurs : visualiser, modifier et supprimer des utilisateurs.
+- Gestion des signalements : visualiser, traiter et supprimer des signalements.
+- Gestion des annonces : visualiser, approuver ou rejeter des annonces.
+
+### Mode Utilisateur
+En mode utilisateur, vous pouvez :
+- Parcourir les annonces disponibles.
+- Rechercher des annonces par catégorie ou mots-clés.
+- Visualiser les détails des annonces.
+- Créer une annonce
+- Interaction avec d'autres utilisateurs
+
+
+## En savoir plus
+
+Pour en savoir plus sur le développement de votre projet avec Expo, consultez les ressources suivantes :
+
+- [Documentation Expo](https://docs.expo.dev/): Apprenez les fondamentaux, ou explorez des sujets avancés avec nos [guides](https://docs.expo.dev/guides).
+- [Tutoriel Expo](https://docs.expo.dev/tutorial/introduction/): Suivez un tutoriel étape par étape où vous créerez un projet qui fonctionne sur Android, iOS et le web.
+

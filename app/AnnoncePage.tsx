@@ -16,7 +16,7 @@ type AnnoncePageRouteProp = RouteProp<RootStackParamList, 'Annonce'>;
 const AnnoncePage = () => {
   const route = useRoute<AnnoncePageRouteProp>();
   const { id } = route.params;
-  const { cards ,setSignalements } = useSession();
+  const { cards, setSignalements } = useSession();
 
   const backgroundColor = useThemeColor({}, 'background');
   const { setLoading } = useLoading();
@@ -27,7 +27,7 @@ const AnnoncePage = () => {
   useEffect(() => {
     const fetchSignalements = async () => {
       try {
-        const responseSignalements = await fetchData(`/annonce/${id}/signalements`, 'GET',undefined, setLoading);
+        const responseSignalements = await fetchData(`/annonce/${id}/signalements`, 'GET', undefined, setLoading);
         setSignalements(responseSignalements);
       } catch (error) {
         console.error('Failed to fetch signalements:', error);
@@ -47,7 +47,7 @@ const AnnoncePage = () => {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor }]}>
-      <CustomBackButton/>
+      <CustomBackButton />
       <ScrollView contentContainerStyle={styles.scrollView}>
         <View style={styles.centeredView}>
           <Annonce {...annonceData} />

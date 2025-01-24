@@ -15,7 +15,7 @@ const RequestPasswordResetForm = () => {
   const primaryColor = useThemeColor({}, 'primary');
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
-  
+
 
   const handleSubmit = async () => {
     try {

@@ -5,25 +5,28 @@ import { AnnonceType } from '@/types/GlobalType';
 import CustomReportButton from '@/components/CustomReportButton';
 import { Redirect, useNavigation } from 'expo-router';
 import { HomeScreenNavigationProp } from '@/types/navigation';
+import { endpoint } from '@/constants/Other';
 
-const Annonce: React.FC<AnnonceType> = ({ titre, Categorie, description, Utilisateur, datePublication,statut,prix,imageUrl,id }) => {
+const Annonce: React.FC<AnnonceType> = ({ titre, Categorie, description, Utilisateur, datePublication, statut, prix, filePath, id }) => {
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const headingColor = useThemeColor({}, 'tertiary');
   const primaryColor = useThemeColor({}, 'primary');
-  const navigation = useNavigation<HomeScreenNavigationProp>(); // Obtient l'objet navigation pour la redirection
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const onPress = () => {
-    navigation.navigate('ReportPage', { annonceId:id });
+    navigation.navigate('ReportPage', { annonceId: id });
   };
+
+  const createUri = endpoint + "/public/serve/" + filePath.split('/').pop();
 
   return (
 
     <View style={[styles.annonce, { backgroundColor, borderColor: primaryColor }]}>
-      <CustomReportButton onPress={onPress}/>
+      <CustomReportButton onPress={onPress} />
       <Text style={[styles.titre, { color: headingColor }]}>{titre}</Text>
       <Text style={[styles.categorie, { color: primaryColor }]}><Text style={styles.label}>Catégorie:</Text> {Categorie.nom}</Text>
-      <Image source={{ uri: "https://picsum.photos/700" }} style={styles.image} />
+      <Image source={{ uri: createUri }} style={styles.image} />
       <Text style={[styles.prix, { color: textColor }]}>{prix} €</Text>
       <Text style={[styles.description, { color: textColor }]}>{description}</Text>
       <Text style={[styles.datePublication, { color: textColor }]}><Text style={styles.label}>Date de publication:</Text> {new Date(datePublication).toLocaleDateString()}</Text>
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 16,
     borderRadius: 8,
-    width: '100%', // Ensure the component takes full width of the parent
+    width: '100%',
   },
   titre: {
     fontSize: 20,
@@ -69,8 +72,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 18,
   },
-  description : {
-    fontSize : 16,
+  description: {
+    fontSize: 16,
     paddingBottom: 25,
   }
 });

@@ -11,7 +11,7 @@ interface ReportItemProps {
 const ReportItem: React.FC<ReportItemProps> = ({ report, onDelete }) => {
     const textColor = useThemeColor({}, 'text');
     let primaryColor = useThemeColor({}, 'primary');
-    if (onDelete!=undefined) {
+    if (onDelete != undefined) {
         primaryColor = useThemeColor({}, 'admin');
     }
     const tertiaryColor = useThemeColor({}, 'tertiary');
@@ -22,7 +22,7 @@ const ReportItem: React.FC<ReportItemProps> = ({ report, onDelete }) => {
             <Text style={[styles.reportMessage, { color: textColor }]}>{report.message}</Text>
             <Text style={[styles.reportEmail, { color: textColor }]}>{report.email}</Text>
             <Text style={[styles.reportDate, { color: textColor }]}>{new Date(report.dateSignalement).toLocaleDateString()}</Text>
-            {onDelete!=undefined && <TouchableOpacity style={[styles.deleteButton, { backgroundColor: primaryColor }]} onPress={onDelete}>
+            {onDelete != undefined && <TouchableOpacity style={[styles.deleteButton, { backgroundColor: primaryColor }]} onPress={onDelete}>
                 <Text style={styles.deleteButtonText}>Delete</Text>
             </TouchableOpacity>}
         </View>

@@ -13,6 +13,7 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const screenWidth = Dimensions.get('window').width;
   const numColumns = screenWidth > 400 ? 2 : 1;
+  console.log(cards)
 
   const onCardPress = (id: string) => {
     navigation.navigate('Annonce', { id });
@@ -21,7 +22,7 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
   const renderCardItem = ({ item }: { item: AnnonceType }) => (
     <View style={[styles.card]}>
       <Card
-        imageUrl={item.imageUrl}
+        filePath={item.filePath}
         Categorie={item.Categorie}
         titre={item.titre}
         Utilisateur={item.Utilisateur}

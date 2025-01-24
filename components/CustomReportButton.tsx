@@ -6,24 +6,24 @@ import { FontAwesome } from '@expo/vector-icons';
 
 
 interface CustomReportButtonProps {
-  position?: ViewStyle; // Propriétés de style pour le positionnement
-  mode?: 'outlined' | 'primary'; // Propriété pour définir le mode du bouton
+  position?: ViewStyle;
+  mode?: 'outlined' | 'primary';
   onPress: () => void;
 }
 
 const CustomReportButton: React.FC<CustomReportButtonProps> = ({ position, mode = 'primary', onPress }) => {
   const redColor = useThemeColor({}, "red");
-  const textColor = useThemeColor({}, "text"); 
+  const textColor = useThemeColor({}, "text");
 
-  const isPrimary = mode === 'primary'; // Vérifie le mode
+  const isPrimary = mode === 'primary';
 
   return (
     <TouchableOpacity
-      testID="custom-report-button" 
-      style={[styles.button, position, isPrimary ? styles.primaryButton : styles.outlinedButton]} // Applique les styles en fonction du mode
+      testID="custom-report-button"
+      style={[styles.button, position, isPrimary ? styles.primaryButton : styles.outlinedButton]}
       onPress={onPress}
     >
-      <View style={[styles.circle, isPrimary ? {backgroundColor:redColor} : {borderWidth: 2,borderColor:redColor}]}>
+      <View style={[styles.circle, isPrimary ? { backgroundColor: redColor } : { borderWidth: 2, borderColor: redColor }]}>
         <FontAwesome name={"exclamation"} size={20} color={isPrimary ? textColor : redColor} style={styles.icon} />
       </View>
     </TouchableOpacity>
@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     padding: 10,
-    right: 0, // Positionné à droite
+    right: 0,
     zIndex: 1000,
   },
   primaryButton: {
     backgroundColor: 'transparent',
   },
   outlinedButton: {
-    backgroundColor: 'transparent', 
+    backgroundColor: 'transparent',
   },
   circle: {
     borderRadius: 30,
