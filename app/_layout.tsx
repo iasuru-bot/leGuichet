@@ -22,6 +22,8 @@ import AdminReportsPage from './AdminReportPage';
 import AdminProfilePage from './AdminProfilePage';
 import CreateAnnonce from './CreateAnnonce';
 import { LoadingProvider } from './LoadingContext';
+import EditAnnonceScreen from '@/components/EditAnnonceScreen';
+import MesAnnoncesPage from './MesAnnoncesPage';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -76,6 +78,8 @@ export default function RootLayout() {
             <Stack.Screen name="AdminProfile" component={AdminProfilePage} options={{ headerShown: false }} />
             <Stack.Screen name="ReportPage" component={ReportPage} options={{ headerShown: false }} />
             <Stack.Screen name="CreateAnnonce" component={CreateAnnonce} options={{ headerShown: false }} />
+            <Stack.Screen name="EditAnnonce" component={EditAnnonceScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="MesAnnonces" component={MesAnnoncesPage} options={{ headerShown: false }}/>
           </Stack.Navigator>
         </LoadingProvider>
       </SessionProvider>

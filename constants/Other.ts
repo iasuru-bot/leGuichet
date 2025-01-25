@@ -1,2 +1,2 @@
 
-export const endpoint = "https://6b31-185-48-252-9.ngrok-free.app";
+export const endpoint = "https://bad4-93-23-5-123.ngrok-free.app";

@@ -4,7 +4,7 @@ import { TextInput, View, Text } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface InputProps {
-  value: string;
+  value: string | undefined;
   onChange: (text: string) => void;
   label: string;
   placeholder?: string;
@@ -28,7 +28,6 @@ const Input: React.FC<InputProps> = ({
 
   // Utilisation des couleurs du thème
   const primaryColor = useThemeColor({}, 'primary');
-  const white = useThemeColor({}, 'white');
   const gray = useThemeColor({}, 'gray');
   const text = useThemeColor({}, 'text');
 
@@ -66,7 +65,6 @@ const StyledTextInput = styled(TextInput)`
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   width: 100%;
-  border: none;
   border-bottom-width: 1px;
   background: transparent;
 `;

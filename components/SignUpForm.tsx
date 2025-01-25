@@ -14,6 +14,7 @@ const Form = () => {
 
   const textColor = useThemeColor({}, 'text');
   const primaryColor = useThemeColor({}, 'primary');
+  const backgroundColor = useThemeColor({}, 'background');
 
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
@@ -91,7 +92,7 @@ const Form = () => {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper  style={{ backgroundColor }}>
       <CustomBackButton />
       <StyledForm>
         <StyledTitle style={{ color: primaryColor }} >Register</StyledTitle>

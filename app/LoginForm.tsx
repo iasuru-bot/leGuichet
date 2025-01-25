@@ -64,9 +64,9 @@ const LoginForm = () => {
 
       // Recupérer les infos du backend
       const responseAnnonce = await fetchData('/annonce', 'GET', undefined);
-      console.log(responseAnnonce);
-      
       setCards(responseAnnonce);
+      
+
       const responseCategories = await fetchData('/categorie', 'GET', undefined);
       setCategories(responseCategories);
 

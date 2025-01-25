@@ -16,6 +16,8 @@ export type RootStackParamList = {
   AdminProfile: undefined;
   ReportPage: { annonceId: string };
   CreateAnnonce: undefined;
+  EditAnnonce: { id: string };
+  MesAnnonces: undefined;
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<

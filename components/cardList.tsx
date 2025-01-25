@@ -7,13 +7,13 @@ import { AnnonceType } from '@/types/GlobalType';
 
 interface CardListProps {
   cards: AnnonceType[];
+  editMode?: boolean;
 }
 
-const CardList: React.FC<CardListProps> = ({ cards }) => {
+const CardList: React.FC<CardListProps> = ({ cards, editMode = false }) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const screenWidth = Dimensions.get('window').width;
   const numColumns = screenWidth > 400 ? 2 : 1;
-  console.log(cards)
 
   const onCardPress = (id: string) => {
     navigation.navigate('Annonce', { id });
@@ -31,7 +31,9 @@ const CardList: React.FC<CardListProps> = ({ cards }) => {
         id={item.id} 
         description={item.description} 
         prix={item.prix} 
-        statut={item.statut}      />
+        statut={item.statut}      
+        editMode={editMode}
+        />
     </View>
   );
 

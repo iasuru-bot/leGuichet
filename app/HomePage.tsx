@@ -19,7 +19,7 @@ const HomePage = () => {
       <Image source={require('@/assets/images/logo.png')} style={styles.logo} />
       <View style={[styles.form, { backgroundColor, borderColor: primaryColor }]}>
         <Text style={[styles.message, { color: textColor }]}>Trouvez tout ce qui vous plait !</Text>
-        <NavigationButton title="Se connecter" onPress={() => navigation.navigate('Login')} variant="secondary" />
+        <NavigationButton title="Se connecter" onPress={() => navigation.navigate('Landing')} variant="secondary" />
         <NavigationButton title="S'enregistrer" onPress={() => navigation.navigate('SignUp')} variant='primary' />
       </View>
     </View>

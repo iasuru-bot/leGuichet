@@ -26,9 +26,11 @@ const Navbar = () => {
             case 'home':
                 navigation.navigate('Landing');
                 break;
-
             case 'list':
                 navigation.navigate('CreateAnnonce');
+                break;
+            case 'list-alt':
+                navigation.navigate('MesAnnonces');
                 break;
             case 'user':
                 navigation.navigate('Profile');
@@ -53,6 +55,12 @@ const Navbar = () => {
                         onPress={() => handleSelect('list')}
                     >
                         <FontAwesome name="list" size={25} color={selected === 'list' ? primaryColor : white} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.button, selected === 'list-alt' && styles.selectedButton]}
+                        onPress={() => handleSelect('list-alt')}
+                    >
+                        <FontAwesome name="list-alt" size={25} color={selected === 'list-alt' ? primaryColor : white} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.button, selected === 'user' && styles.selectedButton]}

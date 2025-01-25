@@ -4,7 +4,7 @@ import { TextInput, View, Text } from 'react-native';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface InputMultiligneProps {
-  value: string;
+  value: string | undefined;
   onChange: (text: string) => void;
   label: string;
   placeholder?: string;
