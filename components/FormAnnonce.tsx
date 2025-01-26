@@ -43,8 +43,9 @@ const FormAnnonce: React.FC<FormAnnonceProps> = ({ onClose }) => {
       return;
     }
 
-    let filePath = '';
-    if (file) {
+    let filePath = 'uploads/image1.jpg';
+    // impossible de upload un file depuis expo mais ca fonctionne depuis postman on laisse en stand by 
+    if (false) {
       const fileData: any = new FormData();
       const fileBlob = await fetch(file.uri).then(r => r.blob());
       fileData.append('file', fileBlob, file.name);
@@ -122,9 +123,9 @@ const FormAnnonce: React.FC<FormAnnonceProps> = ({ onClose }) => {
           initValueTextStyle={{ color: textColor }}
           selectTextStyle={{ color: textColor }}
         />
-        <TouchableOpacity onPress={handleFilePick} style={styles.filePicker}>
+        {false &&<TouchableOpacity onPress={handleFilePick} style={styles.filePicker}>
           <Text style={{ color: textColor }}>{file ? file.name : 'Choisir un fichier'}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
         <View style={styles.buttonContainer}>
           <Button title="Créer" onPress={handleSubmit} variant="primary" />
           <View style={styles.buttonSpacing} />

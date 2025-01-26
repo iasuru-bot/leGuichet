@@ -54,7 +54,7 @@ const Navbar = () => {
                         style={[styles.button, selected === 'list' && styles.selectedButton]}
                         onPress={() => handleSelect('list')}
                     >
-                        <FontAwesome name="list" size={25} color={selected === 'list' ? primaryColor : white} />
+                        <FontAwesome name="plus" size={25} color={selected === 'list' ? primaryColor : white} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.button, selected === 'list-alt' && styles.selectedButton]}

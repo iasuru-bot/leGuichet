@@ -7,6 +7,7 @@ export interface SessionContextType {
   userInfo: UserType | null;
   activeTab: string;
   cards: AnnonceType[];
+  mesAnnonces: AnnonceType[];
   categories: CategorieType[];
   signalements: SignalementType[];
   setUserInfo: (userInfo: UserType) => void;
@@ -14,6 +15,7 @@ export interface SessionContextType {
   setCards: (cards: AnnonceType[]) => void;
   setCategories: (categories: CategorieType[]) => void;
   setSignalements: (signalements: SignalementType[]) => void;
+  setMesAnnonces: (cards: AnnonceType[]) => void;
   resetSession: () => void;
 }
 
@@ -29,6 +31,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
   const [userInfo, setUserInfo] = useState<UserType | null>(null);
   const [activeTab, setActiveTab] = useState<string>('home');
   const [cards, setCards] = useState<AnnonceType[]>([]);
+  const [mesAnnonces, setMesAnnonces] = useState<AnnonceType[]>([]);
   const [categories, setCategories] = useState<CategorieType[]>([]);
   const [signalements, setSignalements] = useState<SignalementType[]>([]);
 
@@ -36,6 +39,7 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     setUserInfo(null);
     setActiveTab('home');
     setCards([]);
+    setMesAnnonces([]);
     setCategories([]);
     setSignalements([]);
   };
@@ -48,11 +52,13 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
         cards,
         categories,
         signalements,
+        mesAnnonces,
         setUserInfo,
         setActiveTab,
         setCards,
         setCategories,
         setSignalements,
+        setMesAnnonces,
         resetSession,
       }}
     >

@@ -3,13 +3,13 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { HomeScreenNavigationProp } from '@/types/navigation';
 import { useSession } from './SessionContext';
 import CustomBackButton from '@/components/CustomBackButton';
 import { fetchData } from '@/hooks/fetchData';
+import Input from '@/components/Input';
 
 const LoginForm = () => {
   const { setUserInfo, setCards, setCategories, setActiveTab } = useSession();

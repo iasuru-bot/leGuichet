@@ -23,6 +23,10 @@ npm install
 ```bash
 npx expo start
 ```
+### Modifier l'url du back dans Other.ts
+```bash
+export const endpoint = "https://1ba2-2-12-123-124.ngrok-free.app";
+```
 
 Dans la sortie, vous trouverez des options pour ouvrir l'application dans un :
 

@@ -59,7 +59,6 @@ const StyledTextInput = styled(TextInput)`
   font-size: 16px;
   padding: 10px 10px 10px 5px;
   width: 100%;
-  border: none;
   border-bottom-width: 1px;
   background: transparent;
 `;
